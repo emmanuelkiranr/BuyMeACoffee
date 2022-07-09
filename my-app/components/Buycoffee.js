@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import abi from "../utils/BuyMeACoffee";
 
 const Buycoffee = (props) => {
-  const contractAddress = "0x9078e1c55f455bb8a3db34f0b2044e078c49d20a";
+  const contractAddress = "0x1F21AE1A86c8e440B44FA7a0C65C28ad5C15743b";
   const contractABI = abi.abi;
 
   const [name, setName] = useState("");
@@ -19,7 +19,7 @@ const Buycoffee = (props) => {
     setMessage(event.target.value);
   };
 
-  const buycoffee = async () => {
+  const buycoffee = async (amount) => {
     try {
       {
         if (props.active) {
@@ -36,7 +36,7 @@ const Buycoffee = (props) => {
           const buycoffee = await contract.buyChai(
             name ? name : "Anom", // if name is true (ie it not a non empty string) then use that value else "Anom"
             message ? message : "Hello! Enjoy your coffee",
-            { value: ethers.utils.parseEther("0.001") }
+            { value: ethers.utils.parseEther(amount) }
           );
 
           await buycoffee.wait();
@@ -148,8 +148,14 @@ const Buycoffee = (props) => {
               />
             </div>
             <div>
-              <button type="button" onClick={() => buycoffee()}>
+              <button type="button" onClick={() => buycoffee("0.001")}>
                 Send 1 coffee for 0.001 ETH
+              </button>
+            </div>
+            <br />
+            <div>
+              <button type="button" onClick={() => buycoffee("0.003")}>
+                Send 1 large coffee for 0.003 ETH
               </button>
             </div>
           </form>
