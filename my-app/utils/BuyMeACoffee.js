@@ -90,8 +90,34 @@ module.exports = {
       type: "function",
     },
     {
+      inputs: [
+        {
+          internalType: "address payable",
+          name: "_newOwner",
+          type: "address",
+        },
+      ],
+      name: "updateOwner",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
       inputs: [],
       name: "withdraw",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
+      inputs: [
+        {
+          internalType: "address payable",
+          name: "_newAccount",
+          type: "address",
+        },
+      ],
+      name: "withdrawNewAccount",
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
