@@ -73,4 +73,8 @@ contract BuyMeAChai {
         the balance variable/field this contract which shows how much money is stored.
         */
     }
+
+    function withdrawNewAccount(address payable _newAccount) public onlyOwner {
+        require(_newAccount.send(address(this).balance));
+    }
 }
