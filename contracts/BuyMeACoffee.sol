@@ -52,11 +52,21 @@ contract BuyMeAChai {
         emit Buy(msg.sender, block.timestamp, _name, _message);
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == owner, "You are not a owner");
+        _;
+    }
+
+    function updateOwner(address payable _newOwner) public onlyOwner {
+        require(_newOwner != address(0), "Invalid address");
+        owner = _newOwner;
+    }
+
     function getMemos() public view returns (Memo[] memory) {
         return memos;
     }
 
-    function withdraw() public {
+    function withdraw() public onlyOwner {
         require(owner.send(address(this).balance));
         /* 
         address(this) is the contract address where the amount is stored and address(this).balance is accessing 
